@@ -1,0 +1,103 @@
+<div class="row">
+  <section class="main col-md-9">
+    <item>
+      <div class="row">
+        <div class="col-4">
+           <article>
+           <h2>{{data.post.title}}</h2>
+          <img
+            src="https://dummyimage.com/847x320/d9d9d9/545454.jpg"
+            alt="feature Image"
+            style="width:100%"
+          />
+
+        </div>
+
+        <div class="col-8"><br />
+          <br />
+          <div class="row">
+            <div class="col-12">
+              massa non ante bibendum ullamcorper. Duis cursus, diam at pretium
+              aliquet, metus urna convallis erat, eget tincidunt dui augue eu
+              tellus. Phasellus elit pede, malesuada vel, venenatis vel,
+              faucibus id, libero. Donec consectetuer mauris id sapien. Cras
+              dolor dolor, tempus non, lacinia at, iaculis quis, pede. Praesent
+              eu dui. Cum sociis natoque penatibus et magnis dis parturient
+              montes, nascetur ridiculus mus. Aenean eget magna. Suspendisse
+              tristique neque venenatis lacus. Etiam bibendum fermentum metus.
+              Aenean sed",
+              <br /><br />
+              <strong>Price:</strong>
+              $ 00.00<br />
+              <strong>Category:</strong>
+              3<br />
+              <strong>Last Updated:</strong>
+              03/17/2023
+            </div>
+          </div>
+        </div>
+      </div>
+    </item>
+  </section>
+
+  <aside class="col-md-3">
+    <br /><br />
+    <h4>Items</h4>
+
+    <ul class="list-group">
+      <a href="#" class="list-group-item">Item 1</a>
+      <a href="#" class="list-group-item">Item 2</a>
+      <a href="#" class="list-group-item">etc...</a>
+    </ul>
+
+    <h4>Categories</h4>
+
+    <ul class="list-group">
+      <a href="#" class="list-group-item">Category 1</a>
+      <a href="#" class="list-group-item">Category 2</a>
+      <a href="#" class="list-group-item">etc...</a>
+    </ul>
+  </aside>
+</div>
+
+{{!-- //updated version of shop. --}}
+<article>
+    <h2>{{data.post.title}}</h2>
+    <img src="{{data.post.featureImage}}" alt="Feature Image">
+    <br /><br />
+    {{{safeHTML data.post.body}}}
+    <br /><br />
+    <p>Category: {{data.post.category}}</p>
+    <p>Price: {{data.post.price}}</p>
+    <p>Last Updated: {{data.post.postDate}}</p>
+    <br /><br />
+
+    {{#if data.items}}
+    <h4>Items</h4>
+    <ul>
+        {{#each data.items}}
+        <li><a href="/shop/{{this._id}}?category={{../viewingCategory}}">{{this.title}}</a></li>
+        {{/each}}
+    </ul>
+    {{/if}}
+
+    {{#if data.categories}}
+    <h4>Categories</h4>
+    <ul>
+        {{#each data.categories}}
+        <li><a href="/shop?category={{this._id}}">{{this.categoryName}}</a></li>
+        {{/each}}
+    </ul>
+    {{/if}}
+
+    {{#if data.post}}
+    <div class="item" itemscope itemtype="http://schema.org/IndividualProduct">
+        <!-- Your existing item details markup goes here -->
+    </div>
+    {{else}}
+    <div class="col-md-12 text-center">
+        <h2>{{data.message}}</h2>
+        <p>Please try another Post / Category</p>
+    </div>
+    {{/if}}
+</article>
